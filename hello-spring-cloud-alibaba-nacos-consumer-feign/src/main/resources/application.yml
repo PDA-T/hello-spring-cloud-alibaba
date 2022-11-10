@@ -9,6 +9,10 @@ spring:
 server:
   port: 9092
 
+feign:
+  sentinel:
+    enabled: true
+
 management:
   endpoints:
     web:

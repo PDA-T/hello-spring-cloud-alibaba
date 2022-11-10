@@ -1,5 +1,6 @@
 package com.pda.hello.spring.cloud.alibaba.nacos.consumer.feign.service;
 
+import com.pda.hello.spring.cloud.alibaba.nacos.consumer.feign.service.fallback.NacosProviderFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @Description 消费者Service
  * @since version-1.0
  */
-@FeignClient(value = "nacos-provider")// 连接nacos-provider服务
+@FeignClient(value = "nacos-provider",fallback = NacosProviderFallback.class)// 连接nacos-provider服务,指定熔断器
 public interface NacosProviderService {
 	/**
 	 * @Date 2022/11/10 18:52
