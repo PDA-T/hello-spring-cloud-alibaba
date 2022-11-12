@@ -1,0 +1,52 @@
+spring:
+  application:
+    # 应用名称
+    name: spring-gateway
+  cloud:
+    # 使用Nacos服务发现
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    # 服务熔断
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+        port: 8721
+    # 路由网关
+    gateway:
+      # 与服务发现结合,采用服务名的路由策略
+      discovery:
+        locator:
+          enabled: true
+      # 路由规则
+      routes:
+        # 采用自定义路由ID
+        - id: NACOS-CONSUMER
+          # 采用LoadBalanceClient方式请求,以lb://开头,后面为注册在Nacos上的服务名
+          uri: lb://nacos-consumer
+          # 匹配用户请求
+          predicates:
+            # 匹配Get和Post
+            - Method=GET,POST
+        - id: NACOS-CONSUMER-FEIGN
+          uri: lb://nacos-consumer-feign
+          predicates:
+            - Method=GET,POST
+
+server:
+  port: 9000
+
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# 日志级别
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
