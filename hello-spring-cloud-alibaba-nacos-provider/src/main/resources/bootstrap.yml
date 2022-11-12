@@ -1,0 +1,11 @@
+spring:
+  application:
+    # ??Nacos???????
+    name: nacos-provider-config
+  cloud:
+    nacos:
+      config:
+        # ???????yaml????
+        file-extension: yaml
+        # Nacos ????
+        server-addr: 127.0.0.1:8848
