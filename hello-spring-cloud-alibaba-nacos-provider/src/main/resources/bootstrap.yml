@@ -1,11 +1,11 @@
 spring:
   application:
-    # ??Nacos???????
+    # 对应Nacos Config中的Data Id,实际应用名称以配置中心的配置为准
     name: nacos-provider-config
   cloud:
     nacos:
       config:
-        # ???????yaml????
+        # 查找名为nacos-provider-config.yaml的配置文件
         file-extension: yaml
-        # Nacos ????
+        # Nacos 地址
         server-addr: 127.0.0.1:8848
