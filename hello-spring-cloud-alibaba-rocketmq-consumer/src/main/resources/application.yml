@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: rocketmq-consumer
+  cloud:
+    stream:
+      bindings:
+        input: {content-type: application/json,destination: test-topic,group: test-group}
+      rocketmq:
+        binder:
+          namesrv-addr: 127.0.0.1:9876
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+server:
+  port: 9093
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
